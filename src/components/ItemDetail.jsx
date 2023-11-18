@@ -1,47 +1,35 @@
 import React from 'react'
+import {Card, CardBody, Stack, Divider, ButtonGroup, CardFooter, Heading, Text, Center} from '@chakra-ui/react'
+import ItemCount from './ItemCount'
 import { useParams } from 'react-router-dom'
-import {Card, CardBody, Stack, Divider, ButtonGroup, Button, CardFooter, Heading, Text, Center} from '@chakra-ui/react'
 
 
-const ItemDetail = ({productos}) => {
 
-
-  const {id} = useParams()  
-
-    const filteredProduct = productos.filter((producto) => producto.id == id)
+const ItemDetail = ({producto}) => {
+    const {id} = useParams()
+    const filteredProduct = producto.filter((producto) => producto.id == id);
 
   return (
     <>
-        {
-            filteredProduct.map((p)=>{
-                return(
-                    <Center p='1rem'>
-                    <Card maxW='sm'>
-                        <CardBody>
-                            <Stack mt='6' spacing='3'>
-                                <p>imagen</p>
-                            <Heading size='md'>{p.name}</Heading>
-                            </Stack>
-                        </CardBody>
-                        <Text>{p.description}</Text>
-                        <Text>${p.price}</Text>
-                        <Divider />
-                        <CardFooter>
-                            <ButtonGroup spacing='2'>
-                            <Button variant='ghost' colorScheme='blue'>
-                                contador
-                            </Button>
-                            </ButtonGroup>
-                        </CardFooter>
-                    </Card>
-                    </Center>
-                )
-            })
-        }
-
-
-
-    </>
+			{filteredProduct.map((p) => {
+				return (
+					<div key={p.id}>
+						<div className='item-detail'>
+							<img className='item-detail__img' src={p.image} alt='' />
+							<div className='item-detail__info'>
+								<h2 className='item-detail__title'>{p.title}</h2>
+								<span className='item-detail__price'>$ {p.price}.-</span>
+								<p className='item-detail__description'>{p.description}</p>
+								<hr />
+							</div>
+							<div className='item-detail__buttons-container'>
+								<ItemCount filteredProduct={filteredProduct} />
+							</div>
+						</div>
+					</div>
+				);
+			})}
+		</>
   )
 }
 

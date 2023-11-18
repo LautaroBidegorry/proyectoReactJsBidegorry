@@ -1,30 +1,27 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
+import {Button, Flex, Box, Spacer} from '@chakra-ui/react'
+import { CartContext } from '../context/shoppingCartContext'
 
-const ItemCount = () => {
-    const [contador,setContador]=useState(0)
-    const suma = () => {
-
-        contador < 10? setContador(contador +1): alert("no se cuenta con stock")
-    }
-
-    const resta = ()=>{
-        contador > 0? setContador(contador -1): alert("minimo alcanzado")
-    }
-
-    const onAdd =()=> {
-        alert(`Producto agregado al carrito: ${contador}`)
-
-    }
+const ItemCount = ({filteredProduct}) => {
+    const [count,setCount]=useState(0)
+    const{addToCart} = useContext(CartContext)
 
   return (
-    <div>
-        <p>{contador}</p>
-        <button onClick={suma}>+</button>
-        <button onClick={resta}>-</button>
-        <button onClick={onAdd}>Agregar en el carrito</button>
-    </div>
+    <Flex>
+        <Box>
+            <Button variant= 'outline' colorScheme='teal'onClick={()=> setCount(count -1)}m={1}> -
+             </Button>
+            <Button m={1}>{count}</Button>
+            <Button variant='outline' colorScheme='teal' onClick={()=> setCount(count+1)} m={1}> + </Button>
+        </Box>
+        <Spacer/>
+        <Box m={1}>
+            <Button onClick={()=>addToCart(filteredProduct, count)} >Add to cart</Button>
+        </Box>
+    </Flex>
   )
 }
+
 
 export default ItemCount

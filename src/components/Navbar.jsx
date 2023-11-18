@@ -1,13 +1,16 @@
 import React from 'react'
 import CartWidget from './CartWidget'
 import { Menu, MenuButton, MenuList, MenuItem, Flex, Box, Spacer, Stack } from '@chakra-ui/react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, } from 'react-router-dom'
 
 
 
 
 
 const Navbar = () => {
+
+   
+
 
 
   return (
